@@ -22,3 +22,26 @@
 # Выведите соответствующий данному латинско-английский словарь, в точности соблюдая формат входных данных. В
 # частности, первым должен идти перевод лексикографически минимального латинского слова, далее — второго в этом
 # порядке и т.д. Внутри перевода английские слова должны быть также отсортированы лексикографически.
+
+n = int(input()) # number of english words
+D = dict()
+Latin = list()
+
+for i in range(n):
+    txt = input().replace(',', '').split()
+    D[txt[0]] = txt[2::]
+    Latin = Latin + txt[2::]
+
+Latin = list(set(Latin))
+Latin.sort()
+
+print(len(Latin))
+
+for word in Latin:
+    English = []
+    for key in D.keys():
+        if word in D[key]:
+            English.append(key)
+    English.sort()
+    print("{} - ".format(word) + ", ".join(English))
+
