@@ -23,25 +23,22 @@
 # частности, первым должен идти перевод лексикографически минимального латинского слова, далее — второго в этом
 # порядке и т.д. Внутри перевода английские слова должны быть также отсортированы лексикографически.
 
-n = int(input()) # number of english words
-D = dict()
-Latin = list()
+dictionary = dict()
+latin = list()
+n = int(input())  # number of english words
 
+# заполняем словарь
 for i in range(n):
     txt = input().replace(',', '').split()
-    D[txt[0]] = txt[2::]
-    Latin = Latin + txt[2::]
+    dictionary[txt[0]] = txt[2::]
+    latin = latin + txt[2::]
 
-Latin = list(set(Latin))
-Latin.sort()
+latin = sorted(list(set(latin)))
+print(len(latin))
 
-print(len(Latin))
-
-for word in Latin:
-    English = []
-    for key in D.keys():
-        if word in D[key]:
-            English.append(key)
-    English.sort()
-    print("{} - ".format(word) + ", ".join(English))
-
+for word in latin:
+    english = []
+    for key in dictionary.keys():
+        if word in dictionary[key]:
+            english.append(key)
+    print("{} - ".format(word) + ", ".join(sorted(english)))
