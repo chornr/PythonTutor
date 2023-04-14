@@ -10,6 +10,7 @@
 # отданных за него в одном из штатов. Подведите итоги выборов: для каждого из участника голосования определите число
 # отданных за него голосов. Участников нужно выводить в алфавитном порядке.
 
+# My
 D = dict()
 for i in range(int(input())):
     candidate, votes = [j for j in input().split()]
@@ -17,3 +18,20 @@ for i in range(int(input())):
 
 for candidate in sorted(D):
     print(candidate, D[candidate])
+
+
+# ChatGPT
+n = int(input())  # количество записей
+
+votes = {}  # создаем пустой словарь голосов
+
+for i in range(n):
+    candidate, vote_count = input().split()  # считываем очередную запись
+    vote_count = int(vote_count)
+    if candidate not in votes:  # если кандидат еще не встречался, добавляем его в словарь
+        votes[candidate] = vote_count
+    else:  # иначе обновляем количество голосов за кандидата
+        votes[candidate] += vote_count
+
+for candidate in sorted(votes.keys()):  # сортируем имена кандидатов по алфавиту
+    print(candidate, votes[candidate])  # выводим результаты голосования

@@ -23,3 +23,24 @@ for i in range(m):
 # Cardiff
 # Seattle
 # London
+
+
+# ChatGPT
+
+# Считываем список стран и городов
+n = int(input())  # количество стран
+countries = {}    # словарь со списками городов для каждой страны
+for i in range(n):
+    line = input().split()
+    country = line[0]
+    cities = line[1:]
+    countries[country] = cities
+
+# Находим страну для каждого города
+m = int(input())  # количество городов для поиска
+for i in range(m):
+    city = input().strip()
+    for country, cities in countries.items():
+        if city in cities:
+            print(country)
+            break

@@ -50,3 +50,23 @@ for key in FK:
     for k in range(len(DK)):
         tup = (DK[k], D[DK[k]])
         print(' '.join(tup))
+
+# ChatGPT
+# Неправильное решение.
+# На одном из тестов ниже программа неправильно работает
+from collections import defaultdict
+
+# создаем словарь для хранения информации о покупателях и их покупках
+customers = defaultdict(lambda: defaultdict(int))
+
+# читаем данные из файла и обновляем словарь
+with open('input.txt', 'r') as f:
+    for line in f:
+        buyer, item, quantity = line.strip().split()
+        customers[buyer][item] += int(quantity)
+
+# выводим результаты в нужном формате
+for buyer in sorted(customers.keys()):
+    print(buyer + ':')
+    for item in sorted(customers[buyer].keys()):
+        print(item, customers[buyer][item])

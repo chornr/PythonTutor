@@ -52,3 +52,37 @@ def dict_genealogy_levels():
 
     for i in NAMES:
         print(i, LEVELS[i])
+
+
+# ChatGPT
+# Неправильное решение.
+# На одном из тестов ниже программа неправильно работает
+def dfs(node, height, parents, heights):
+    """
+    Функция для выполнения DFS на дереве
+    """
+    heights[node] = height
+    if node in parents:
+        parent = parents[node]
+        dfs(parent, height+1, parents, heights)
+
+
+# Чтение входных данных
+n = int(input())
+parents = {}
+for i in range(n-1):
+    child, parent = input().split()
+    parents[child] = parent
+
+# Вычисление высоты каждого элемента
+heights = {}
+for node in parents.keys():
+    dfs(node, 0, parents, heights)
+
+# Формирование и сортировка списка элементов
+elements = [(node, heights[node]) for node in set(parents.keys()) | set(parents.values())]
+elements.sort()
+
+# Вывод элементов
+for element in elements:
+    print(element[0], element[1])

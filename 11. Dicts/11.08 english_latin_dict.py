@@ -42,3 +42,23 @@ for word in latin:
         if word in dictionary[key]:
             english.append(key)
     print("{} - ".format(word) + ", ".join(sorted(english)))
+
+# ChatGPT
+dictionary = {}  # создаем пустой словарь
+n = int(input())  # считываем количество английских слов в словаре
+
+# заполняем словарь
+for i in range(n):
+    english, translations_str = input().split(" - ")
+    translations = translations_str.split(", ")
+    for latin in translations:
+        if latin not in dictionary:
+            dictionary[latin] = [english]
+        else:
+            dictionary[latin].append(english)
+
+print(len(dictionary.keys()))
+
+# выводим словарь
+for latin in sorted(dictionary.keys()):
+    print(latin + " - " + ", ".join(sorted(dictionary[latin])))

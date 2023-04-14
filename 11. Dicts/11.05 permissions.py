@@ -15,14 +15,17 @@
 # возвращать OK если над файлом выполняется допустимая операция, или же Access denied, если операция недопустима.
 
 D = dict()
-
 N = int(input())
+
 for i in range(N):
     row = input().split()
     for i in range(len(row)):
-        if row[i] == 'R': row[i] = 'read'
-        elif row[i] == 'W': row[i] = 'write'
-        elif row[i] == 'X': row[i] = 'execute'
+        if row[i] == 'R':
+            row[i] = 'read'
+        elif row[i] == 'W':
+            row[i] = 'write'
+        elif row[i] == 'X':
+            row[i] = 'execute'
     txt, *args = row
     D[txt] = args
 
@@ -33,3 +36,22 @@ for i in range(M):
         print('OK')
     else:
         print('Access denied')
+
+# ChatGPT
+n = int(input())
+files = {}
+for i in range(n):
+    name, *permissions = input().split()
+    files[name] = set(permissions)
+
+m = int(input())
+for i in range(m):
+    operation, name = input().split()
+    if operation == "read" and "R" in files[name]:
+        print("OK")
+    elif operation == "write" and "W" in files[name]:
+        print("OK")
+    elif operation == "execute" and "X" in files[name]:
+        print("OK")
+    else:
+        print("Access denied")
