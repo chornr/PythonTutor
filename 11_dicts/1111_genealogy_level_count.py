@@ -18,6 +18,26 @@
 # Эта задача имеет решение сложности O(n), но вам достаточно написать решение сложности O(n2) (не считая сложности
 # обращения к элементам словаря).
 
+# LATEST RESOLUTION
+n = int(input())
+family = {}
+family_tree = {}
+for i in range(n-1):
+    kid, parent = input().split()
+    family[kid] = parent
+while len(family_tree) != n:
+    for kid, parent in family.items():
+        if parent not in family.keys():
+            family_tree[parent] = 0
+            family_tree[kid] = 1
+        elif parent in family_tree:
+            family_tree[kid] = family_tree[parent] + 1
+parents = list(family_tree.keys())
+parents.sort()
+for name in parents:
+    print(name, family_tree[name])
+
+# OLD RESOLUTION
 def dict_genealogy_levels():
     N = int(input())
     PARENTS = []
