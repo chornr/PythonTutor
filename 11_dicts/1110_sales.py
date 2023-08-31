@@ -8,48 +8,33 @@
 # вида товаров. Список покупателей, а также список товаров для каждого покупателя нужно выводить в лексикографическом
 # порядке.
 
-FULL = []
-NAMES = []
+D = {}
 
-try:
+def inputs():
     while True:
-        line = input().split()  # Get new line and convert it to list
-        FULL.append(line)
-        NAMES.append(line[0])
-except EOFError:
-    pass
+        try:
+            yield input().split()
+        except (ValueError, EOFError):
+            return
 
-NAMES = set(NAMES)
-NAMES = list(NAMES)
-FINALE = {}
-
-for i in NAMES:
-    FINALE[i] = []
-
-for name in NAMES:
-    for i in range(len(FULL)):
-        if name in FULL[i]:
-            FINALE[name].append(FULL[i][1:])
-
-FK = list(FINALE.keys())
-FK = sorted(FK)
-FV = []
-
-for key in FK:
-    print(key + ":")
-    FV = sorted(FINALE[key])
-    D = {}
-    for j in range(len(FV)):
-        if not FV[j][0] in D.keys():
-            D[FV[j][0]] = FV[j][1]
+for name, product, amount in inputs():
+    if name not in D:
+        D[name] = {product: int(amount)}
+    else:
+        if product in D[name]:
+            D[name][product] += int(amount)
         else:
-            D[FV[j][0]] = str(int(D[FV[j][0]]) + int(FV[j][1]))
+            D[name][product] = int(amount)
 
-    DK = list(D.keys())
-    DK = sorted(DK)
-    for k in range(len(DK)):
-        tup = (DK[k], D[DK[k]])
-        print(' '.join(tup))
+names = list(D.keys())
+names.sort()
+
+for name in names:
+    print(name + ":")
+    products = list(D[name].keys())
+    products.sort()
+    for product in products:
+        print(product + " " + str(D[name][product]))
 
 # ChatGPT
 # Неправильное решение.
