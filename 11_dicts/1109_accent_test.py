@@ -33,3 +33,27 @@
 #
 # 2. Неверно расставлены ударения во всех словах, кроме The (оно отсутствует в словаре, в нем поставлено ровно одно
 # ударение). В остальных словах либо ударные все буквы (в слове PAGE), либо не поставлено ни одного ударения.
+
+def find_errors(answer):
+    errors = 0
+    for word in answer:
+        if word.lower() in words_low:
+            if word in words_reg:
+                continue
+            else:
+                errors += 1
+        else:
+            caps = 0
+            for letter in word:
+                if ord(letter) < 97:
+                    caps += 1
+            if caps != 1:
+                errors += 1
+    return errors
+
+N = int(input())
+words_reg = [input() for i in range(N)]
+words_low = [word.lower() for word in words_reg]
+answer = input().split()
+
+print(find_errors(answer))
