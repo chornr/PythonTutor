@@ -1,9 +1,49 @@
 # Условие
 # Даны два элемента в дереве. Определите, является ли один из них потомком другого.
 #
-# Во входных данных записано дерево в том же формате, что и в предыдущей задаче Далее идет число запросов K. В каждой из следующих K строк, содержатся имена двух элементов дерева.
+# Во входных данных записано дерево в том же формате, что и в предыдущей задаче Далее идет число запросов K. 
+# В каждой из следующих K строк, содержатся имена двух элементов дерева.
 #
-# Для каждого такого запроса выведите одно из трех чисел: 1, если первый элемент является предком второго, 2, если второй является предком первого или 0, если ни один из них не является предком другого.
+# Для каждого такого запроса выведите одно из трех чисел: 
+# 1, если первый элемент является предком второго, 
+# 2, если второй является предком первого 
+# или 0, если ни один из них не является предком другого.
+
+# UPDATED RESOLUTION
+
+def find_ancestors(name1):
+    ancestors = []
+    while True:
+        ancestors.append(name1)
+        try:
+            name1 = family[name1]
+        except KeyError:
+            return ancestors
+
+n = int(input())
+family = dict()
+
+for i in range(n-1):
+    kid, parent = input().split()
+    family[kid] = parent
+
+m = int(input())
+results = []
+
+for _ in range(m):
+    name_1, name_2 = input().split()
+    name_1_ancestors = find_ancestors(name_1)
+    name_2_ancestors = find_ancestors(name_2)
+    
+    if name_2 in name_1_ancestors:
+        results.append("2")
+    elif name_1 in name_2_ancestors:
+        results.append("1")
+    else:
+        results.append("0")
+
+print(" ".join(results))
+
 
 # CORRECT
 n = int(input())
